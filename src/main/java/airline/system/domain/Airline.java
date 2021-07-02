@@ -14,7 +14,16 @@ public class Airline {
     private Long id;
     private String airlineName;
     private int initialBudget,altitude ,longitude;
-    private String baseName;
+    @OneToOne
+    private Destination baseName;
+
+    @OneToMany(
+
+            mappedBy = "airline",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Destination> destinationList = new ArrayList<>();
 
     @OneToMany(
 
