@@ -35,8 +35,8 @@ public class AircraftService {
     public Aircraft getAircraft(Long id)
     {
         return aircraftRepository.findById(id).orElseThrow(()->new AircraftNoFound(id)); /** validation if really exist **/
-
     }
+
 
     public Aircraft deleteAircraft(Long id)
     {
@@ -48,10 +48,8 @@ public class AircraftService {
     public Aircraft editAircraft(Long id,Aircraft aircraft)
     {
         Aircraft aircraftToEdit  = getAircraft(id);
-
         aircraftToEdit.setMonthInUse(aircraft.getMonthInUse());
         return aircraftToEdit;
-
 
     }
 

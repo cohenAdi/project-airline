@@ -15,7 +15,6 @@ public class Market {
     private Long id;
 
     @OneToMany(
-
             mappedBy = "market",
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -25,6 +24,18 @@ public class Market {
     private List<Airline> airlineList = new ArrayList<>();
 
     public Market() {
+    }
+
+    public void addAirline(Airline airline)
+    {
+        if(airline!=null){
+            airlineList.add(airline);
+        }
+
+    }
+    public void removeAirline(Airline airline)
+    {
+        airlineList.remove(airline);
     }
 
     public Long getId() {

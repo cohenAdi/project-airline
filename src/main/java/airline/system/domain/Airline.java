@@ -14,6 +14,7 @@ public class Airline {
     private Long id;
     private String airlineName;
     private int initialBudget,altitude ,longitude;
+
     @OneToOne
     private Destination baseName;
 
@@ -23,7 +24,7 @@ public class Airline {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Destination> destinationList = new ArrayList<>();
+    private final List<Destination> destinationList = new ArrayList<>();
 
     @OneToMany(
 
@@ -31,7 +32,7 @@ public class Airline {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private List<Aircraft> aircreaft_list = new ArrayList<>();
+    private final List<Aircraft> aircreaft_list = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "market_id")
@@ -47,6 +48,21 @@ public class Airline {
 
     public Airline() {
 
+    }
+
+    public void addAircraft(Aircraft aircraft)
+    {
+        if(aircraft!=null)
+        {
+            aircreaft_list.add(aircraft);
+        }
+    }
+    public void removeAircraft(Aircraft aircraft)
+    {
+        if(aircraft!=null)
+        {
+            aircreaft_list.remove(aircraft);
+        }
     }
 
 
