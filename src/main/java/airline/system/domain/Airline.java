@@ -42,8 +42,8 @@ public class Airline {
         this.initialBudget = initialBudget;
         this.altitude = altitude;
         this.longitude = longitude;
-        this.baseName = baseName;
     }
+
 
     public Airline() {
 
@@ -70,9 +70,6 @@ public class Airline {
         return longitude;
     }
 
-    public String getBaseName() {
-        return baseName;
-    }
 
     public void setId(long id) {
         this.id = id;
@@ -94,7 +91,5 @@ public class Airline {
         this.longitude = longitude;
     }
 
-    public void setBaseName(String baseName) {
-        this.baseName = baseName;
-    }
+
 }
