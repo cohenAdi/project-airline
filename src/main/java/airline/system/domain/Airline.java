@@ -1,6 +1,9 @@
 package airline.system.domain;
 
 
+import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
+import org.omg.CORBA.INTERNAL;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,10 +16,12 @@ public class Airline {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String airlineName;
-    private int initialBudget,altitude ,longitude;
+    private int initialBudget;
+
 
     @OneToOne
-    private Destination baseName;
+    private Destination homeBase;
+
 
     @OneToMany(
 
@@ -25,7 +30,6 @@ public class Airline {
             orphanRemoval = true
     )
     private final List<Destination> destinationList = new ArrayList<>();
-
     @OneToMany(
 
             mappedBy = "airline",
@@ -33,16 +37,18 @@ public class Airline {
             orphanRemoval = true
     )
     private final List<Aircraft> aircreaft_list = new ArrayList<>();
-
     @ManyToOne
     @JoinColumn(name = "market_id")
     private Market market;
 
+
+
     public Airline(String airlineName, int initialBudget, int altitude, int longitude, String baseName) {
         this.airlineName = airlineName;
+        this.homeBase = new Destination(altitude,longitude,baseName,TypeDestination.HOMEBASE);
         this.initialBudget = initialBudget;
-        this.altitude = altitude;
-        this.longitude = longitude;
+
+
     }
 
 
@@ -65,6 +71,14 @@ public class Airline {
         }
     }
 
+    public void addDestination(Destination destination)
+    {
+        if(destination!=null)
+        {
+            destinationList.add(destination);
+        }
+    }
+
 
     public Long getId() {
         return id;
@@ -78,15 +92,6 @@ public class Airline {
         return initialBudget;
     }
 
-    public int getAltitude() {
-        return altitude;
-    }
-
-    public int getLongitude() {
-        return longitude;
-    }
-
-
     public void setId(long id) {
         this.id = id;
     }
@@ -99,13 +104,27 @@ public class Airline {
         this.initialBudget = initialBudget;
     }
 
-    public void setAltitude(int altitude) {
-        this.altitude = altitude;
+    public Destination getHomeBase() {
+        return homeBase;
     }
 
-    public void setLongitude(int longitude) {
-        this.longitude = longitude;
+    public void setHomeBase(Destination homeBase) {
+        this.homeBase = homeBase;
     }
 
+    public List<Destination> getDestinationList() {
+        return destinationList;
+    }
 
+    public List<Aircraft> getAircreaft_list() {
+        return aircreaft_list;
+    }
+
+    public Market getMarket() {
+        return market;
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+    }
 }

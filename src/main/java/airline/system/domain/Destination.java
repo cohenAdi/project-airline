@@ -2,6 +2,7 @@ package airline.system.domain;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Destination {
@@ -27,6 +28,7 @@ public class Destination {
     {
 
     }
+
 
     public int getLatitude() {
         return latitude;

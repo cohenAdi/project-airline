@@ -39,6 +39,14 @@ public class MarketService {
         return market;
     }
 
+//    public Market getListOfAirlines(Long marketId)
+//    {
+//        Market market = getMarket(marketId);
+//        Airline airline
+//
+//    }
+
+
     public Market removeAirline(Long marketId, Long airlineId)
     {
         Market market = getMarket(marketId);
