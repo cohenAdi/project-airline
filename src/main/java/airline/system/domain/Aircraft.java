@@ -1,7 +1,11 @@
 package airline.system.domain;
 
+import airline.system.dataToTransfer.AircraftDto;
+import lombok.Data;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 @Table(name = "aircraft")
 public class Aircraft {
@@ -13,6 +17,7 @@ public class Aircraft {
     private int maxDis;
     private int price;
     private int monthInUse;
+    private String serialNumber;
 
     @ManyToOne
     @JoinColumn(name="airline_id")
@@ -26,8 +31,24 @@ public class Aircraft {
         this.monthInUse = monthInUse;
     }
 
-    public Aircraft() {
+    public Aircraft() { }
+
+    public String getSerialNumber() {
+        return serialNumber;
     }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public static Aircraft from(AircraftDto aircraftDto)
+    {
+        Aircraft aircraft = new Aircraft();
+        aircraft.setSerialNumber(aircraftDto.getSerialNumber());
+        return aircraft;
+    }
+
+
 
     public String getAircraftName() {
         return aircraftName;
