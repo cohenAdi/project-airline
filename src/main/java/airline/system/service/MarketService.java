@@ -7,6 +7,8 @@ import airline.system.repository.MarketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MarketService {
 
@@ -33,7 +35,7 @@ public class MarketService {
 
     public Market addNewAirline(Long marketId, Long airlineId)
     {
-        Market market = getMarket(marketId);
+        Market market = Market.getInstance();
         Airline airline = airlineService.getAirline(airlineId);
         market.addAirline(airline);
         return market;
@@ -54,6 +56,15 @@ public class MarketService {
         market.removeAirline(airline);
         return market;
     }
+
+    public List<String> getCurrBudgetAirlines()
+    {
+        Market market = Market.getInstance();
+
+        return market.AirlinesCurrBadget();
+    }
+
+
 
 
 

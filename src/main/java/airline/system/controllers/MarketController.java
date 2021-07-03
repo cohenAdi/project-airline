@@ -1,9 +1,10 @@
 package airline.system.controllers;
 
 
+import airline.system.dataToTransfer.AircraftDto;
 import airline.system.dataToTransfer.AirlineDto;
 import airline.system.dataToTransfer.MarketDto;
-import airline.system.domain.Airline;
+import airline.system.domain.Aircraft;
 import airline.system.domain.Market;
 import airline.system.service.MarketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/market")
 public class MarketController {
 
 
+    private final MarketService marketService;
     private final MarketService marketService;
 
     @Autowired
@@ -32,6 +35,12 @@ public class MarketController {
     {
         Market market = marketService.addMarket(Market.from(marketDto));
         return new ResponseEntity<>(MarketDto.from(market), HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<List<String>> getAirlineBudg()
+    {
+        List<String> airlines = marketService.getCurrBudgetAirlines();
+        return new ResponseEntity<>(airlines, HttpStatus.OK);
     }
 
     @GetMapping(value = "{id}")

@@ -55,6 +55,14 @@ public class AirlineService {
         airline.addAircraft(aircraft);
         return airline;
     }
+    public Airline removeAirCraft(Long airlineId,Long aircraftId)
+    {
+        Airline airline = getAirline(airlineId);
+        Aircraft aircraft =aircraftService.getAircraft(aircraftId);
+        airline.removeAircraft(aircraft);
+        return airline;
+    }
+
 
 
 

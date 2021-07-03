@@ -1,7 +1,5 @@
 package airline.system.domain;
 
-
-import airline.system.dataToTransfer.AircraftDto;
 import airline.system.dataToTransfer.MarketDto;
 
 import javax.persistence.*;
@@ -29,6 +27,12 @@ public class Market {
     )
 
     private List<Airline> airlineList = new ArrayList<>();
+    @OneToMany(
+            mappedBy = "airline",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private final List<Destination> destinationList = new ArrayList<>();
 
 
     public void addAirline(Airline airline)
@@ -40,7 +44,7 @@ public class Market {
     }
     public static Market from(MarketDto marketDto)
     {
-        Market market = new Market();
+        Market market = getInstance();
         market.setId(marketDto.getId());
         return market;
     }
@@ -65,6 +69,33 @@ public class Market {
     public void setAirlineList(List<Airline> airlineList) {
         this.airlineList = airlineList;
     }
+    public void addDestination(Destination destination)
+    {
+        if(destination!=null)
+        {
+            destinationList.add(destination);
+        }
+    }
+    public List<Destination> getDestinationList() {
+        return destinationList;
+    }
+
+    public List<String> AirlinesCurrBadget()
+    {
+        List<String> budgetList = new ArrayList<>();
+        if(airlineList!=null){
+            for(Airline i :airlineList)
+            {
+                budgetList.add("Name: "+ i.getAirlineName() +" Budget: "+i.getCurrBudget());
+            }
+        }
+        return budgetList;
+
+
+
+    }
+
+
 
 
 

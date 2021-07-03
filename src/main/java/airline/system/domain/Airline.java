@@ -1,13 +1,13 @@
 package airline.system.domain;
 
-
-import org.hibernate.procedure.spi.ParameterRegistrationImplementor;
-import org.omg.CORBA.INTERNAL;
+import airline.system.dataToTransfer.AirlineDto;
+import airline.system.dataToTransfer.MarketDto;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 
 @Entity
 @Table(name = "airline")
@@ -17,21 +17,24 @@ public class Airline {
     private Long id;
     private String airlineName;
     private int initialBudget;
+    private int currBudget;
+
+
+    public Airline(String airlineName, int initialBudget, int altitude, int longitude, String baseName) {
+        this.airlineName = airlineName;
+        this.homeBase = new Destination(altitude,longitude,baseName,TypeDestination.HOMEBASE);
+        this.initialBudget = initialBudget;
+        this.currBudget = initialBudget;
+    }
+
+
+    public Airline() { }
 
 
     @OneToOne
     private Destination homeBase;
 
-
     @OneToMany(
-
-            mappedBy = "airline",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private final List<Destination> destinationList = new ArrayList<>();
-    @OneToMany(
-
             mappedBy = "airline",
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -39,46 +42,24 @@ public class Airline {
     private final List<Aircraft> aircreaft_list = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "market_id")
-    private Market market;
+    Market market = Market.getInstance();
+
+//    public HashMap<String,Double> DestinationsFromHomeBase(Airline airline)
+//    {
+//        Destination homeBase = airline.getHomeBase();
+//
+//    }
 
 
 
-    public Airline(String airlineName, int initialBudget, int altitude, int longitude, String baseName) {
-        this.airlineName = airlineName;
-        this.homeBase = new Destination(altitude,longitude,baseName,TypeDestination.HOMEBASE);
-        this.initialBudget = initialBudget;
 
-
+    public int getCurrBudget() {
+        return currBudget;
     }
 
-
-    public Airline() {
-
+    public void setCurrBudget(int currBudget) {
+        this.currBudget = currBudget;
     }
-
-    public void addAircraft(Aircraft aircraft)
-    {
-        if(aircraft!=null)
-        {
-            aircreaft_list.add(aircraft);
-        }
-    }
-    public void removeAircraft(Aircraft aircraft)
-    {
-        if(aircraft!=null)
-        {
-            aircreaft_list.remove(aircraft);
-        }
-    }
-
-    public void addDestination(Destination destination)
-    {
-        if(destination!=null)
-        {
-            destinationList.add(destination);
-        }
-    }
-
 
     public Long getId() {
         return id;
@@ -112,10 +93,6 @@ public class Airline {
         this.homeBase = homeBase;
     }
 
-    public List<Destination> getDestinationList() {
-        return destinationList;
-    }
-
     public List<Aircraft> getAircreaft_list() {
         return aircreaft_list;
     }
@@ -123,8 +100,31 @@ public class Airline {
     public Market getMarket() {
         return market;
     }
-
-    public void setMarket(Market market) {
-        this.market = market;
+    public static Airline from(AirlineDto airlineDto)
+    {
+        Airline airline = new Airline();
+        airline.setId(airlineDto.getId());
+        return airline;
     }
+
+    public void removeAircraft(Aircraft aircraft)
+    {
+        if(aircraft!=null)
+        {
+            this.setCurrBudget((int) (currBudget+(aircraft.getPrice()*(1-aircraft.getMonthInUse()*0.02))));
+            aircraft.setPrice((int) (aircraft.getPrice()*(1-aircraft.getMonthInUse()*0.02)));
+            aircreaft_list.remove(aircraft);
+        }
+    }
+
+    public void addAircraft(Aircraft aircraft)
+    {
+        if(aircraft!=null)
+        {
+            this.setCurrBudget((int) (currBudget-(aircraft.getPrice()*(1-aircraft.getMonthInUse()*0.02))));
+            aircreaft_list.add(aircraft);
+        }
+    }
+
+
 }

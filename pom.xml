@@ -31,6 +31,12 @@
             <version>3.0.0</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.servicemix.bundles</groupId>
+            <artifactId>org.apache.servicemix.bundles.lucene-sandbox</artifactId>
+            <version>5.4.0_1</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
@@ -68,10 +74,9 @@
         </dependency>
         <dependency>
             <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-spatial-extras</artifactId>
-            <version>6.0.0</version>
+            <artifactId>lucene-spatial</artifactId>
+            <version>8.2.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
