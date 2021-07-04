@@ -11,11 +11,11 @@ After running the project :
 
 Folders : 
 1. DOMAIN : The object which create the base for the system : 
- a.Aircraft objecct
- b.Airrline
- c.Distance : lan,lon and name of position . 
- d.market :Singleton Where airline and distance list's supose to be
- e.typeDest - enum class with two types .
+a.Aircraft objecct
+b.Airrline
+c.Distance : lan,lon and name of position . 
+d.market :Singleton Where airline and distance list's supose to be
+e.typeDest - enum class with two types .
  
 2.Exception class: If object id isn't found in the service it throw unique exception .
 
