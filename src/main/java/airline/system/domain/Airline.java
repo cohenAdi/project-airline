@@ -21,7 +21,6 @@ public class Airline {
     private Double altitude,longitude;
     private String baseName;
 
-
     @OneToOne
     private Destination homeBase;
 
@@ -35,10 +34,7 @@ public class Airline {
         this.currBudget = initialBudget;
     }
 
-
     public Airline() { }
-
-
 
     @OneToMany(
             mappedBy = "airline",
@@ -46,8 +42,9 @@ public class Airline {
             orphanRemoval = true
     )
     private final List<Aircraft> aircreaft_list = new ArrayList<>();
+
     @ManyToOne
-    @JoinColumn(name = "market_id")
+    @JoinColumn(name = "marketId")
     Market market = Market.getInstance();
 
 
@@ -114,14 +111,9 @@ public class Airline {
 
     public static Airline from(AirlineDto airlineDto)
     {
-        Airline airline = new Airline();
-        airline.setId(airlineDto.getId());
-        airline.setAirlineName(airlineDto.getAirlineName());
-        airline.setInitialBudget(airlineDto.getInitialBudget());
-        airline.setAltitude(airlineDto.getLan());
-        airline.setLongitude(airlineDto.getLon());
-        airline.setBaseName(airlineDto.getBaseName());
-        airline.setId(airlineDto.getId());
+        Airline airline = new Airline(airlineDto.getAirlineName(),
+                airlineDto.getInitialBudget(), airlineDto.getLan(),
+                airlineDto.getLon(), airlineDto.getBaseName());
         return airline;
     }
 

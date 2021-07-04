@@ -38,7 +38,6 @@ public class AirlineController {
         return new ResponseEntity<>(AirlineDto.from(airline) , HttpStatus.OK);
     }
 
-
     @PostMapping(value = "{airlineId}/Aircrafts/{aircraftId}/add ")
     public ResponseEntity<AirlineDto> addAircraft(@PathVariable final Long airlineId,
                                                         @PathVariable final  Long aircraftId)
@@ -47,7 +46,7 @@ public class AirlineController {
         return new ResponseEntity<>(AirlineDto.from(airline),HttpStatus.OK);
     }
 
-    @PostMapping(value = "{airlineId}/Aircrafts/{aircraftId}/buy_sell ")
+    @PostMapping(value = "{airlineId}/Aircrafts/{aircraftId}/buy ")
     public ResponseEntity<AirlineDto> buyAnAircraft(@PathVariable final Long airlineIdSell,
                                                   @PathVariable final  Long aircraftIdSell,
                                                     @PathVariable final Long airlineIdBuy

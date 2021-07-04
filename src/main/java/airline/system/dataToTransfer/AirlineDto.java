@@ -22,13 +22,13 @@ public class AirlineDto {
     public static AirlineDto from(Airline airline)
     {
         AirlineDto airlineDto = new AirlineDto();
+        airlineDto.setId(airline.getId());
         airlineDto.setAirlineName(airline.getAirlineName());
         airlineDto.setInitialBudget(airline.getInitialBudget());
         airlineDto.setLon(airline.getLongitude());
         airlineDto.setLan(airline.getAltitude());
         airlineDto.setBaseName(airline.getBaseName());
 
-//        airlineDto.setAircraftList(airline.getAircreaft_list());
 
         return airlineDto;
     }

@@ -1,7 +1,6 @@
 package airline.system.service;
 
-import airline.system.domain.Aircraft;
-import airline.system.domain.Airline;
+
 import airline.system.domain.Destination;
 import airline.system.exception.DestinationNotFound;
 import airline.system.repository.DestinationRepository;

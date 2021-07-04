@@ -1,6 +1,7 @@
 package airline.system.domain;
 
 import airline.system.dataToTransfer.MarketDto;
+import lombok.Data;
 import org.apache.lucene.spatial.util.GeoDistanceUtils;
 import sun.security.krb5.internal.crypto.Des;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "market")
 public class Market {
@@ -21,7 +23,7 @@ public class Market {
     }
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+  //  @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany(
             mappedBy = "market",
@@ -37,12 +39,7 @@ public class Market {
     )
     private List<Destination> destinationList = new ArrayList<>();
 
-    public void addAirline(Airline airline)
-    {
-        if(airline!=null){
-            airlineList.add(airline);
-        }
-    }
+
     public static Market from(MarketDto marketDto)
     {
         Market market = getInstance();
@@ -89,6 +86,12 @@ public class Market {
         }
 
 
+    }
+    public void addAirline(Airline airline)
+    {
+        if(airline!=null){
+            airlineList.add(airline);
+        }
     }
     public List<Destination> getDestinationList() {
         return destinationList;

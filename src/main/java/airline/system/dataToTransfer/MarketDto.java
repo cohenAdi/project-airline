@@ -16,7 +16,6 @@ public class MarketDto {
     {
         MarketDto marketDto = new MarketDto();
         marketDto.setId(market.getId());
-       // marketDto.setAirlineList(marketDto.getAirlineList());
         return marketDto;
     }
 

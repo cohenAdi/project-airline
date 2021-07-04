@@ -50,10 +50,16 @@ public class MarketController {
         return new ResponseEntity<>(airlines, HttpStatus.OK);
     }
 
-    @PostMapping(value = "{marketId/destinations/{destinationId}/add")
+    @PostMapping(value = "{marketId}/destinations/{destinationId}/add")
     public ResponseEntity<MarketDto> addDestination(@PathVariable final Long destinationId)
     {
         Market market = marketService.addDestination(destinationId);
+        return new ResponseEntity<>(MarketDto.from(market),HttpStatus.OK);
+    }
+    @PostMapping(value = "{marketId}/airline/{airlineId}/add ")
+    public ResponseEntity<MarketDto> addAirlineToMarket(@PathVariable final Long airlineId)
+    {
+        Market market = marketService.addNewAirline(airlineId);
         return new ResponseEntity<>(MarketDto.from(market),HttpStatus.OK);
     }
 
@@ -81,18 +87,13 @@ public class MarketController {
 //    }
 
 
-    @PostMapping(value = "{marketId}/Airlines/{airlineId}/add ")
-    public ResponseEntity<MarketDto> addAirlineToMarket(@PathVariable final  Long airlineId)
-    {
-        Market market = marketService.addNewAirline(airlineId);
-        return new ResponseEntity<>(MarketDto.from(market),HttpStatus.OK);
-    }
+
 
     @DeleteMapping(value = "{marketId}/Airlines/{airlineId}/remove ")
     public ResponseEntity<MarketDto> removeAirlineToMarket(@PathVariable final Long marketId,
                                                         @PathVariable final  Long airlineId)
     {
-        Market market = marketService.removeAirline(marketId,airlineId);
+        Market market = marketService.removeAirline(airlineId);
         return new ResponseEntity<>(MarketDto.from(market),HttpStatus.OK);
     }
 

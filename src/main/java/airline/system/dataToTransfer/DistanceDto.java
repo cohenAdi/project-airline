@@ -22,6 +22,7 @@ public class DistanceDto {
         distanceDto.setName(destination.getName());
         distanceDto.setType(destination.getType());
         return distanceDto;
+
     }
 
 
