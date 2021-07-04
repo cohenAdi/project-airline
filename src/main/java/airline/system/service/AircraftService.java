@@ -7,9 +7,6 @@ import airline.system.repository.AircraftRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class AircraftService {
@@ -27,16 +24,11 @@ public class AircraftService {
         return aircraftRepository.save(aircraft);
     }
 
-    public List<Aircraft> getAircraftsList()
-    {
-        return StreamSupport.stream( aircraftRepository.findAll().spliterator(),false).collect(Collectors.toList());
-    }
 
     public Aircraft getAircraft(Long id)
     {
         return aircraftRepository.findById(id).orElseThrow(()->new AircraftNoFound(id)); /** validation if really exist **/
     }
-
 
     public Aircraft deleteAircraft(Long id)
     {

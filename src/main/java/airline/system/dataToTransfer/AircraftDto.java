@@ -12,7 +12,7 @@ public class AircraftDto {
     private int maxDis;
     private int price;
     private int monthInUse;
-    private String serialNumber;
+
 
     public static AircraftDto from (Aircraft aircraft)
     {
@@ -22,12 +22,8 @@ public class AircraftDto {
         aircraftDto.setMaxDis(aircraft.getMaxDis());
         aircraftDto.setPrice(aircraft.getPrice());
         aircraftDto.setMonthInUse(aircraft.getMonthInUse());
-        aircraftDto.setSerialNumber(aircraft.getSerialNumber());
-
         return aircraftDto;
     }
-
-
 
 
 }

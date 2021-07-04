@@ -1,14 +1,14 @@
 package airline.system.domain;
 
 import airline.system.dataToTransfer.AirlineDto;
-import airline.system.dataToTransfer.MarketDto;
+import lombok.Data;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-
+@Data
 @Entity
 @Table(name = "airline")
 public class Airline {
@@ -18,11 +18,19 @@ public class Airline {
     private String airlineName;
     private int initialBudget;
     private int currBudget;
+    private Double altitude,longitude;
+    private String baseName;
 
 
-    public Airline(String airlineName, int initialBudget, int altitude, int longitude, String baseName) {
+    @OneToOne
+    private Destination homeBase;
+
+
+    public Airline(String airlineName, int initialBudget, Double altitude, Double longitude, String baseName) {
+        this.baseName =baseName;
         this.airlineName = airlineName;
-        this.homeBase = new Destination(altitude,longitude,baseName,TypeDestination.HOMEBASE);
+        this.altitude =altitude;
+        this.longitude=longitude;
         this.initialBudget = initialBudget;
         this.currBudget = initialBudget;
     }
@@ -31,8 +39,6 @@ public class Airline {
     public Airline() { }
 
 
-    @OneToOne
-    private Destination homeBase;
 
     @OneToMany(
             mappedBy = "airline",
@@ -43,14 +49,6 @@ public class Airline {
     @ManyToOne
     @JoinColumn(name = "market_id")
     Market market = Market.getInstance();
-
-//    public HashMap<String,Double> DestinationsFromHomeBase(Airline airline)
-//    {
-//        Destination homeBase = airline.getHomeBase();
-//
-//    }
-
-
 
 
     public int getCurrBudget() {
@@ -85,24 +83,44 @@ public class Airline {
         this.initialBudget = initialBudget;
     }
 
-    public Destination getHomeBase() {
-        return homeBase;
-    }
-
-    public void setHomeBase(Destination homeBase) {
-        this.homeBase = homeBase;
-    }
 
     public List<Aircraft> getAircreaft_list() {
         return aircreaft_list;
     }
 
-    public Market getMarket() {
-        return market;
+    public Double getAltitude() {
+        return altitude;
     }
+
+    public String getBaseName() {
+        return baseName;
+    }
+
+    public void setBaseName(String baseName) {
+        this.baseName = baseName;
+    }
+
+    public void setAltitude(Double altitude) {
+        this.altitude = altitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
     public static Airline from(AirlineDto airlineDto)
     {
         Airline airline = new Airline();
+        airline.setId(airlineDto.getId());
+        airline.setAirlineName(airlineDto.getAirlineName());
+        airline.setInitialBudget(airlineDto.getInitialBudget());
+        airline.setAltitude(airlineDto.getLan());
+        airline.setLongitude(airlineDto.getLon());
+        airline.setBaseName(airlineDto.getBaseName());
         airline.setId(airlineDto.getId());
         return airline;
     }
@@ -125,6 +143,8 @@ public class Airline {
             aircreaft_list.add(aircraft);
         }
     }
+
+
 
 
 }

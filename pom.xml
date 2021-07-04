@@ -73,6 +73,11 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.sonatype.nexus.bundles</groupId>
+            <artifactId>org.sonatype.nexus.bundles.elasticsearch</artifactId>
+            <version>3.26.1-02</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-spatial</artifactId>
             <version>8.2.0</version>

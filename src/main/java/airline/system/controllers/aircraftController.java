@@ -30,13 +30,13 @@ public class aircraftController {
         return new ResponseEntity<>(AircraftDto.from(aircraft), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<AircraftDto>> getAircrafts()
-    {
-        List<Aircraft> aircrafts = aircraftService.getAircraftsList();
-        List<AircraftDto> aircraftDtos = aircrafts.stream().map(AircraftDto::from).collect(Collectors.toList());
-        return new ResponseEntity<>(aircraftDtos, HttpStatus.OK);
-    }
+//    @GetMapping
+//    public ResponseEntity<List<AircraftDto>> getAircrafts()
+//    {
+//        List<Aircraft> aircrafts = aircraftService.getAircraftsList();
+//        List<AircraftDto> aircraftDtos = aircrafts.stream().map(AircraftDto::from).collect(Collectors.toList());
+//        return new ResponseEntity<>(aircraftDtos, HttpStatus.OK);
+//    }
 
 
     @GetMapping(value = "{id}")

@@ -7,7 +7,7 @@ import airline.system.exception.AirlineNotFound;
 import airline.system.repository.AirlineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.yaml.snakeyaml.error.Mark;
+
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,15 +38,14 @@ public class AirlineService {
     public Airline addAirline(Airline airline)
     {
         return airlineRepository.save(airline);
-
     }
 
-    public Airline deleteAirline(Long id)
-    {
-        Airline airline= getAirline(id);
-        airlineRepository.delete(airline);
-        return airline;
-    }
+//    public Airline deleteAirline(Long id)
+//    {
+//        Airline airline= getAirline(id);
+//        airlineRepository.delete(airline);
+//        return airline;
+//    }
 
     public Airline addAirCraft(Long airlineId,Long aircraftId)
     {

@@ -17,7 +17,7 @@ public class Aircraft {
     private int maxDis;
     private int price;
     private int monthInUse;
-    private String serialNumber;
+
 
     @ManyToOne
     @JoinColumn(name="airline_id")
@@ -33,19 +33,14 @@ public class Aircraft {
 
     public Aircraft() { }
 
-    public String getSerialNumber() {
-        return serialNumber;
-    }
-
-    public void setSerialNumber(String serialNumber) {
-        this.serialNumber = serialNumber;
-    }
 
     public static Aircraft from(AircraftDto aircraftDto)
     {
-        Aircraft aircraft = new Aircraft();
-        aircraft.setSerialNumber(aircraftDto.getSerialNumber());
-        return aircraft;
+        return new Aircraft(aircraftDto.getAircraftName(),
+                aircraftDto.getMaxDis(),
+                aircraftDto.getPrice(),
+                aircraftDto.getMonthInUse());
+
     }
 
 

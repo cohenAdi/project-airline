@@ -1,9 +1,12 @@
 package airline.system.domain;
 
 import airline.system.dataToTransfer.MarketDto;
+import org.apache.lucene.spatial.util.GeoDistanceUtils;
+import sun.security.krb5.internal.crypto.Des;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity
@@ -25,22 +28,20 @@ public class Market {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-
     private List<Airline> airlineList = new ArrayList<>();
+
     @OneToMany(
-            mappedBy = "airline",
+            mappedBy = "market",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    private final List<Destination> destinationList = new ArrayList<>();
-
+    private List<Destination> destinationList = new ArrayList<>();
 
     public void addAirline(Airline airline)
     {
         if(airline!=null){
             airlineList.add(airline);
         }
-
     }
     public static Market from(MarketDto marketDto)
     {
@@ -69,12 +70,25 @@ public class Market {
     public void setAirlineList(List<Airline> airlineList) {
         this.airlineList = airlineList;
     }
-    public void addDestination(Destination destination)
-    {
+//    public void addDestination(Destination destination)
+//    {
+//        if(destination!=null)
+//        {
+//            destinationList.add(destination);
+//        }
+//    }
+//    public List<Destination> getDestinationList() {
+//        return destinationList;
+//    }
+
+
+    public void addDestinationToList(Destination destination) {
         if(destination!=null)
         {
             destinationList.add(destination);
         }
+
+
     }
     public List<Destination> getDestinationList() {
         return destinationList;
@@ -90,10 +104,20 @@ public class Market {
             }
         }
         return budgetList;
-
-
-
     }
+
+//        public HashMap<String,Double> DestinationsFromHomeBase(Airline airline)
+//    {
+//        HashMap<String,Double> dest = new HashMap<>();
+//        Destination homeBase = airline.getHomeBase();
+//        for(Destination i : destinationList)
+//        {
+//            dest.put(i.getName() ,  GeoDistanceUtils.haversin(homeBase.getLatitude(),homeBase.getLongtitude() , i.getLatitude(),i.getLongtitude()));
+//
+//        }
+//        return dest;
+//    }
+
 
 
 

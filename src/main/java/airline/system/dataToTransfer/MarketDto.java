@@ -11,14 +11,12 @@ import java.util.List;
 public class MarketDto {
 
     private Long id;
-    private List<Airline> airlineList;
-
 
     public static MarketDto from(Market market)
     {
         MarketDto marketDto = new MarketDto();
         marketDto.setId(market.getId());
-        marketDto.setAirlineList(marketDto.getAirlineList());
+       // marketDto.setAirlineList(marketDto.getAirlineList());
         return marketDto;
     }
 
