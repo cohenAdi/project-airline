@@ -10,19 +10,19 @@ After running the project :
 
 
 Folders : 
-1. DOMAIN : The object which create the base for the system : 
-a.Aircraft objecct
-b.Airrline
-c.Distance : lan,lon and name of position . 
-d.market :Singleton Where airline and distance list's supose to be
-e.typeDest - enum class with two types .
+1. DOMAIN : The objects that create the base for the system : 
+ - Aircraft objecct
+ - Airrline
+ - Distance : lan,lon and name of position . 
+ - market :Singleton Where airline and distance list's supose to be
+ - typeDest - enum class with two types .
  
-2.Exception class: If object id isn't found in the service it throw unique exception .
+2.Exception class: If object id isn't found in the service it throw's unique exception .
 
 3.DTO class - holds the data from controller and make the conncetion between the layers .
 
-4.Repository : class for encapsule and retriev the data we collected. 
+4.Repository : class to encapsulate and retriev the data we collected. 
 
-5.Controllers: mapping ths post\get\delete for the data. 
+5.Controllers: mapping - post\get\delete the data. 
 
 
